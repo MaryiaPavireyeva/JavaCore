@@ -7,12 +7,12 @@ public class Motorcycle extends Vehicle {
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    public String getNameVehicle() {
+        return super.getNameVehicle();
     }
 
     @Override
-    public void setName(String name) {
-        super.setName(name);
+    public void setNameVehicle(String name) {
+        super.setNameVehicle(name);
     }
 }

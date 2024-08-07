@@ -7,11 +7,11 @@ public class Vehicle {
         this.name = name;
     }
 
-    public String getName() {
+    public String getNameVehicle() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setNameVehicle(String name) {
         this.name = name;
     }
 }
