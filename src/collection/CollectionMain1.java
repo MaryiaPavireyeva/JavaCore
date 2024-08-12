@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CollectionMain1 {
@@ -27,5 +28,6 @@ public class CollectionMain1 {
             System.out.println(datum);
         }
         System.out.println("after size: " + data.size());
+
     }
 }

@@ -6,29 +6,29 @@ public class Switch {
 
     public static void dayOfWeek(int number) {  //метод задачи 11
         switch (number) {
+            default:
+                System.out.println("Schedule is not found" +number);
             case 1:
                 System.out.println("Monday schedule");
-                break;
+//                break;
             case 2:
                 System.out.println("Tuesday schedule");
-                break;
+//                break;
             case 3:
                 System.out.println("Wednesday schedule");
-                break;
+//                break;
             case 4:
                 System.out.println("Thursday schedule");
-                break;
+//                break;
             case 5:
                 System.out.println("Friday schedule");
-                break;
+//                break;
             case 6:
                 System.out.println("Saturday schedule");
-                break;
+//                break;
             case 7:
                 System.out.println("Sunday schedule");
-                break;
-            default:
-                System.out.println("Schedule is not found");
+//                break;
         }
     }
 
@@ -71,7 +71,7 @@ public class Switch {
         }
 
         System.out.println("Одиннадцатое задание:");
-        dayOfWeek(5);
+        dayOfWeek(123);
 
         System.out.println("Пятнадцатое задание:");
 
