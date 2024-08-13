@@ -28,11 +28,7 @@ public class DataContainer <T> {
         return a;
     }
 
-    /**
-     *
-     * @param index
-     * @return
-     */
+
     public T get(int index) {
         if (data[index] != null)
             return data[index];
@@ -93,8 +89,6 @@ public class DataContainer <T> {
         return first + second;
     }
 
-    public static void setA(int a) {
-    }
 
     public static void main(String[] args) {
         Integer[] data1 = new Integer[3];
