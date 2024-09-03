@@ -1,6 +1,8 @@
 package hw_Lists5;
 
-public class Animal implements Comparable<Animal>{
+import java.util.Comparator;
+
+public class Animal implements Comparator<Animal> {
     private int age;
     private String nick;
 
@@ -18,7 +20,7 @@ public class Animal implements Comparable<Animal>{
     }
 
     @Override
-    public int compareTo(Animal o) {
-        return age;
+    public int compare(Animal o1, Animal o2) {
+        return o1.getAge().;
     }
 }
