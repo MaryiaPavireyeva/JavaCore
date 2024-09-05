@@ -1,4 +1,4 @@
-package hw_Lists5;
+package hw_Lists5.dto;
 
 import java.util.Comparator;
 
@@ -26,6 +26,10 @@ public class Person implements Comparator<Person> {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public int hashCode() {
         return nick.hashCode() + name.hashCode() + password.hashCode();
@@ -47,7 +51,8 @@ public class Person implements Comparator<Person> {
     }
 
     /**
-     *метод сравнивает длину пароля пользователей
+     * метод сравнивает длину пароля пользователей
+     *
      * @param o1 the object to be compared.
      * @return
      */
@@ -56,24 +61,4 @@ public class Person implements Comparator<Person> {
         return o1.getPassword().length() - o2.getPassword().length();
     }
 
-}
-
-class PersonPasswordComparator implements Comparator<Person>{
-    @Override
-    public int compare(Person o1, Person o2) {
-        if(o1.getPassword().length() > o2.getPassword().length())
-            return 1;
-        else if(o1.getPassword().length() < o2.getPassword().length())
-            return -1;
-        else
-            return 0;
-    }
-}
-
-    class PersonNicknameComparator implements Comparator<Person>{
-
-    @Override
-    public int compare(Person o1, Person o2) {
-        return o1.getNick().compareTo(o2.getNick());
-    }
 }

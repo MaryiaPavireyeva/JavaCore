@@ -2,7 +2,7 @@ package hw_Lists5;
 
 import java.util.Comparator;
 
-public class Animal implements Comparator<Animal> {
+public class Animal {
     private int age;
     private String nick;
 
@@ -19,8 +19,9 @@ public class Animal implements Comparator<Animal> {
         return age;
     }
 
-    @Override
-    public int compare(Animal o1, Animal o2) {
-        return o1.getAge().;
-    }
+//    @Override
+//    public int compare(Integer o1, Integer o2) {
+//        return o1.getAge();
+//    }
+
 }
