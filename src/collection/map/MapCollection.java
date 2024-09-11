@@ -1,6 +1,8 @@
-package collection;
+package collection.map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapCollection {
@@ -22,6 +24,19 @@ public class MapCollection {
         dictionaryEnToRu.put("Driver", "Кучер");
         dictionaryEnToRu.put("Driver", "Вагоноважатый");
 
-       dictionaryEnToRu.get("Driver");
+        String foundData = dictionaryEnToRu.get("Driver");
+
+        System.out.println(foundData);
+
+        Map<String, List<String>> dictionaryEnToRuMulti = new HashMap<>();
+
+        List<String> driver = new ArrayList<>();
+        driver.add("Водитель");
+        driver.add("Шофер");
+        driver.add("Кучер");
+        driver.add("Вагоноважатый");
+        dictionaryEnToRuMulti.put("Driver", driver);
+        List<String> multi = dictionaryEnToRuMulti.get("Driver");
+        System.out.println(multi);
     }
 }
