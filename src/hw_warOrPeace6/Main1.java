@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main1 {
     public static void main(String[] args) throws IOException {
-        String path = "/Users/maryiapavireyeva/IdeaProjects/JavaCore/src/Война и мир_книга.txt";
+        String path = "src/hw_warOrPeace6/Война и мир_книга.txt";
 
         allWordsInText(path);
         topWords(path);
