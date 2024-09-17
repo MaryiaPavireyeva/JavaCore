@@ -1,9 +1,14 @@
 package hw_warOrPeace6;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class EasySearch implements ISearchEngine {
 
     /**
      * Метод возвращает информации о количестве раз которое встречается слово в тексте
+     *
      * @param text текст в котором ищем
      * @param word что ищем в тексте
      * @return кол-во повторений с учетом регистра
@@ -18,7 +23,6 @@ public class EasySearch implements ISearchEngine {
                 if (first >= 0) {
                     int end = first + word.length();
                     String founded = text.substring(first, end);
-                    System.out.println(founded);
                     if (founded.equals(word)) {
                         count++;
                     }
@@ -28,7 +32,6 @@ public class EasySearch implements ISearchEngine {
                 if (first >= 0) {
                     int end = first + word.length();
                     String founded = text.substring(first, end);
-                    System.out.println(founded);
                     if (founded.equals(word)) {
                         count++;
                     }
@@ -41,9 +44,27 @@ public class EasySearch implements ISearchEngine {
         return count;
     }
 
+    String content;
 
-    public static void main(String[] args) {
-        EasySearch ss = new EasySearch();
-        System.out.println(ss.search("символа символа символа символа символа Символа ", "Символа"));
+    public EasySearch(String content) {
+        this.content = content;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        String path = "src/hw_warOrPeace6/Война и мир_книга.txt";
+/**
+ * читаю файл в String и вывожу сколько раз встречаются слова "война", "и" (как союз), "мир".
+ */
+        try {
+            String content = Files.readString(Path.of(path));
+            EasySearch s = new EasySearch(content);
+            long war = s.search(content, "война");
+            long and = s.search(content, "и");
+            long world = s.search(content, "мир");
+            System.out.println("война: " + war + " и: " + and + " мир: " + world);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

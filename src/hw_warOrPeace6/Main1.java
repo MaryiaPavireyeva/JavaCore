@@ -1,8 +1,6 @@
 package hw_warOrPeace6;
 
-import javax.swing.*;
 import java.io.*;
-import java.text.Format;
 import java.util.*;
 
 public class Main1 {
