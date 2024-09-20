@@ -1,13 +1,11 @@
 package hw_warOrPeace6;
 
-import javax.xml.transform.Source;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.SortedMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +16,12 @@ public class FilesForWork {
         this.content = content;
     }
 
+    /**
+     * Метод по поиску в файле
+     * @param text файл, в котором ищем
+     * @param word слово или фраза, которую ищем
+     * @return найденный результат
+     */
     public String search(String text, String word) {
         String founded = "Мы ничего не нашли";
         Pattern p = Pattern.compile(word);
@@ -26,6 +30,30 @@ public class FilesForWork {
             founded = text.substring(matcher.start(), matcher.end());
             }
         return founded;
+    }
+
+    /**
+     * Метод печатает список txt файлов в папке
+     * @param path путь к папке
+     */
+    private static void txtFilesList(String path) {
+        System.out.println("Список всех txt файлов, которые есть в папке: ");
+        File folders = new File(path);
+        File[] files = folders.listFiles();
+        for (File file : files) {
+            if (!file.isFile()) {
+                System.out.println("Не нашли файлов"); //не работает
+            }
+            if (file.isFile()) {
+                String filesName = file.getName();
+                if (filesName.endsWith("txt")) {
+                    System.out.println(file.getName());
+                }
+                if(!filesName.endsWith("txt")) {
+                    System.out.println("Не нашли txt файла");
+                }
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -46,23 +74,8 @@ public class FilesForWork {
 //        }
 
         System.out.println(" ");
-        System.out.println("Список всех txt файлов, которые мы нашли в указанной папке: ");
-        File folders = new File(path);
-        File[] files = folders.listFiles();
-        for (File file : files) {
-            if (file.isFile()) {
-                String filesName = file.getName();
-                if (!file.isFile()) {
-                    System.out.println("Не нашли файлов"); //не работает
-                }
-                if (filesName.endsWith("txt")) {
-                    System.out.println(file.getName());
-                    if(!filesName.endsWith("txt")) {
-                        System.out.println("Не нашли txt файла"); //не работает
-                    }
-                }
-            }
-        }
+        txtFilesList(path);
+
         System.out.println(" ");
         System.out.println("Пожалуйста, выберите файл для работы:  ");
         Scanner scanner2 = new Scanner(System.in);
@@ -77,23 +90,22 @@ public class FilesForWork {
                 String content = Files.readString(Path.of(path + "/" + fileWork));
                 FilesForWork filesForWork = new FilesForWork(content);
                 System.out.println("Вот, что мы нашли: " + filesForWork.search(content, fileWork2));
-                System.out.println("Если хочешь продолжить поиск, введи слово Продолжить. Если хочешь выйти, введи слово Стоп");
+                System.out.println("Если хочешь продолжить поиск, введи слово Продолжить. Если хочешь выйти в папку, введи слово Стоп");
                 Scanner scanner4 = new Scanner(System.in);
                 String wordForWork = scanner.nextLine();
                 if(Objects.equals(wordForWork, stop)) {
-                    break;
+                    txtFilesList(path);
+                    System.out.println("Пожалуйста, выберите файл для работы:  ");
+                    Scanner scanner5 = new Scanner(System.in);
+                    String fileWork1 = scanner.nextLine();
                 }
             }
             System.out.println("Поиск окончен. Для возврата в папку");
         } catch (IOException e) {
             throw new RuntimeException(e);
-//        BufferedReader buffer = new BufferedReader(new FileReader(path + "/" + fileWork));
-//        String s = buffer.readLine();
-//        while (s != null) {
-//            System.out.println(s);
-//            s = buffer.readLine();
         }
 
 
     }
-}
+    }
+
