@@ -23,13 +23,13 @@ public class FilesForWork {
      * @return найденный результат
      */
     public String search(String text, String word) {
-        String founded = "Мы ничего не нашли";
+        String result = "Мы ничего не нашли";
         Pattern p = Pattern.compile(word);
         Matcher matcher = p.matcher(text);
         while (matcher.find()) {
-            founded = text.substring(matcher.start(), matcher.end());
+            result = text.substring(matcher.start(), matcher.end());
             }
-        return founded;
+        return result;
     }
 
     /**
@@ -40,10 +40,13 @@ public class FilesForWork {
         System.out.println("Список всех txt файлов, которые есть в папке: ");
         File folders = new File(path);
         File[] files = folders.listFiles();
+        if(files.length == 0) {
+            System.out.println("Не нашли файлы. Введите другой путь: ");
+            Scanner scanner = new Scanner(System.in);
+            String path2 = scanner.nextLine();
+            txtFilesList(path2);
+        }
         for (File file : files) {
-            if (!file.isFile()) {
-                System.out.println("Не нашли файлов"); //не работает
-            }
             if (file.isFile()) {
                 String filesName = file.getName();
                 if (filesName.endsWith("txt")) {
@@ -61,6 +64,7 @@ public class FilesForWork {
         System.out.println("Введите путь к папке: ");
         Scanner scanner = new Scanner(System.in);
         String path = scanner.nextLine();
+        //обработать если путь неправильный
 
 //        if(path)  дописать  про условие если директория заполнена + дописать проверки если это не директория
 //        for (int i = 0; i < 200; i++) {
@@ -78,34 +82,26 @@ public class FilesForWork {
 
         System.out.println(" ");
         System.out.println("Пожалуйста, выберите файл для работы:  ");
-        Scanner scanner2 = new Scanner(System.in);
         String fileWork = scanner.nextLine();
         try {
             for (int i = 0; i < Integer.MAX_VALUE; i++) {
                 System.out.println(" ");
                 System.out.println("Введите слово или строку для поиска:  ");
-                Scanner scanner3 = new Scanner(System.in);
                 String fileWork2 = scanner.nextLine();
                 String stop = "Стоп";
                 String content = Files.readString(Path.of(path + "/" + fileWork));
                 FilesForWork filesForWork = new FilesForWork(content);
                 System.out.println("Вот, что мы нашли: " + filesForWork.search(content, fileWork2));
                 System.out.println("Если хочешь продолжить поиск, введи слово Продолжить. Если хочешь выйти в папку, введи слово Стоп");
-                Scanner scanner4 = new Scanner(System.in);
                 String wordForWork = scanner.nextLine();
                 if(Objects.equals(wordForWork, stop)) {
                     txtFilesList(path);
                     System.out.println("Пожалуйста, выберите файл для работы:  ");
-                    Scanner scanner5 = new Scanner(System.in);
-                    String fileWork1 = scanner.nextLine();
                 }
             }
-            System.out.println("Поиск окончен. Для возврата в папку");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
     }
 
