@@ -7,7 +7,7 @@ import java.nio.file.Path;
 public class EasySearch implements ISearchEngine {
 
     /**
-     * Метод возвращает информации о количестве раз которое встречается слово в тексте
+     * Метод возвращает информации о количестве раз которое встречается слово в тексте №4.1 дз
      *
      * @param text текст в котором ищем
      * @param word что ищем в тексте
@@ -54,7 +54,7 @@ public class EasySearch implements ISearchEngine {
 
         String path = "src/hw_warOrPeace6/Война и мир_книга.txt";
 /**
- * читаю файл в String и вывожу сколько раз встречаются слова "война", "и" (как союз), "мир".
+ * читаю файл в String и вывожу сколько раз встречаются слова "война", "и" (как союз), "мир". №5.1 дз
  */
         try {
             String content = Files.readString(Path.of(path));

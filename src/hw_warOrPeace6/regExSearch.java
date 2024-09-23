@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class regExSearch implements ISearchEngine {
 
     /**
-     * Метод возвращает информации о количестве раз которое встречается слово в тексте
+     * Метод возвращает информации о количестве раз которое встречается слово в тексте №4.2 дз
      *
      * @param text текст в котором ищем
      * @param word что ищем в тексте
