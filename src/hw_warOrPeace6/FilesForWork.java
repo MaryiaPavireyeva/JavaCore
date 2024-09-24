@@ -20,6 +20,34 @@ public class FilesForWork {
     }
 
     /**
+     * Метод проверяет введенная директория пустая или нет и если пустая, то создает 200 файлов в ней
+     *
+     * @param path путь к папке
+     * @throws IOException
+     */
+    private static void directoryWithFiles(String path) throws IOException {
+        File directory = new File(path);
+        if (directory.isDirectory()) {
+            String[] files = directory.list();
+            if (files.length == 0) {
+                for (int i = 0; i < 200; i++) {
+                    String fileName = UUID.randomUUID().toString();
+                    File file = new File(path + "/" + fileName + ".txt");
+                    file.createNewFile();
+                    Writer write = new FileWriter(file);
+                    write.write("В этом примере сначала создается объект BufferedReader, который оборачивает объект FileReader. FileReader открывает файл для чтения, а BufferedReader обеспечивает эффективное чтение больших объемов текста из файла. Затем происходит чтение файла построчно и добавление каждой строки в объект StringBuilder, который представляет собой изменяемую последовательность символов и может быть использован для создания и модификации строк.");
+                    write.flush();
+                    write.close();
+                }
+            }
+        } else
+            System.out.println("Неправильный путь к папке. Введите новый путь");
+        Scanner scanner = new Scanner(System.in);
+        path = scanner.nextLine();
+        directoryWithFiles(path);
+    }
+
+    /**
      * Метод по поиску слов в файле Задание Работа с файлами
      *
      * @param text файл, в котором ищем
@@ -71,51 +99,48 @@ public class FilesForWork {
      * @param path путь к папке
      */
     private static void workWithFile(Scanner scanner, String path) throws IOException {
+        Map<String, Integer> stringsAndCount = new HashMap<>();
+        Map<String, Map<String, Integer>> stringsWordsCount = new HashMap<>();
+        Writer write = new FileWriter("result.txt");
         System.out.println("Пожалуйста, выберите файл для работы:  ");
         String fileWork = scanner.nextLine();
-        String stop = "Стоп";
-        List<String> filePath = new ArrayList<>();
-        Map<String, Integer> stringsAndCount = new HashMap<>();
         while (true) {
-
-            filePath.add(fileWork);
+            String stop = "Стоп";
 
             System.out.println(" ");
             System.out.println("Введите слово или строку для поиска:  ");
             String searchedString = scanner.nextLine();
             int quantity = 0;
-
+// считаем сколько раз искали слово и кладем ключ(слово) - значение(раз) в мапу
             if (stringsAndCount.isEmpty()) {
                 quantity++;
                 stringsAndCount.put(searchedString, quantity);
             } else {
-                Map<String, Integer> stringsAndCount2 = Map.copyOf(stringsAndCount);
-                for (Map.Entry<String, Integer> valuess : stringsAndCount2.entrySet()) {
-                    String key = valuess.getKey();
-                    Integer value = valuess.getValue();
-                    if (Objects.equals(key, searchedString)) {
-                        if (value >= 0) {
-                            value++;
-                            System.out.println(value);
-                            stringsAndCount.replace(searchedString, stringsAndCount.getOrDefault(searchedString, 0) + 1);
-                        }
-                    } else
-                        stringsAndCount.put(searchedString, 1);
+                if (stringsAndCount.containsKey(searchedString)) {
+                    stringsAndCount.put(searchedString, stringsAndCount.get(searchedString) + 1);
+                } else {
+                    stringsAndCount.put(searchedString, 1);
                 }
-
             }
+            //кладем в новую мапу имя файла и мапу с ключ-значение
+            stringsWordsCount.put(fileWork, stringsAndCount);
+            System.out.println(stringsWordsCount);
 
-            System.out.println(stringsAndCount);
-
+            write.write(stringsWordsCount.toString());
+            write.flush();
 
             String content = Files.readString(Path.of(path + "/" + fileWork));
             FilesForWork filesForWork = new FilesForWork(content);
             System.out.println("Вот, что мы нашли: " + filesForWork.search(content, searchedString));
             System.out.println("Если хочешь продолжить поиск, введи слово Продолжить. Если хочешь выйти в папку, введи слово Стоп");
             String wordForWork = scanner.nextLine();
+
             if (Objects.equals(wordForWork, stop)) {
+                stringsAndCount.clear();
+                stringsWordsCount.clear();
                 txtFilesList(path);
                 System.out.println("Пожалуйста, выберите файл для работы:  ");
+                fileWork = scanner.nextLine();
             }
         }
     }
@@ -125,26 +150,15 @@ public class FilesForWork {
         System.out.println("Введите путь к папке: ");
         Scanner scanner = new Scanner(System.in);
         String path = scanner.nextLine();
-        //обработать если путь неправильный
 
-//        if(path)  дописать  про условие если директория заполнена + дописать проверки если это не директория
-//        for (int i = 0; i < 200; i++) {
-//            String fileName = UUID.randomUUID().toString();
-//            File file = new File(path + "/" + fileName + ".txt");
-//            file.createNewFile();
-//            Writer write = new FileWriter(file);
-//            write.write("В этом примере сначала создается объект BufferedReader, который оборачивает объект FileReader. FileReader открывает файл для чтения, а BufferedReader обеспечивает эффективное чтение больших объемов текста из файла. Затем происходит чтение файла построчно и добавление каждой строки в объект StringBuilder, который представляет собой изменяемую последовательность символов и может быть использован для создания и модификации строк.");
-//            write.flush();
-//            write.close();
-//        }
+        directoryWithFiles(path);
 
         System.out.println(" ");
         txtFilesList(path);
 
-        Writer write = new FileWriter("result.txt");
-
         System.out.println(" ");
         workWithFile(scanner, path);
     }
+
 }
 
