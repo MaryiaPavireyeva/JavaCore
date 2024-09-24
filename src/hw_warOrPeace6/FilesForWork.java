@@ -40,11 +40,12 @@ public class FilesForWork {
                     write.close();
                 }
             }
-        } else
+        } else {
             System.out.println("Неправильный путь к папке. Введите новый путь");
-        Scanner scanner = new Scanner(System.in);
-        path = scanner.nextLine();
-        directoryWithFiles(path);
+            Scanner scanner = new Scanner(System.in);
+            path = scanner.nextLine();
+            directoryWithFiles(path);
+        }
     }
 
     /**
@@ -111,7 +112,7 @@ public class FilesForWork {
             System.out.println("Введите слово или строку для поиска:  ");
             String searchedString = scanner.nextLine();
             int quantity = 0;
-// считаем сколько раз искали слово и кладем ключ(слово) - значение(раз) в мапу
+            // считаем сколько раз искали слово и кладем ключ(слово) - значение(раз) в мапу
             if (stringsAndCount.isEmpty()) {
                 quantity++;
                 stringsAndCount.put(searchedString, quantity);
@@ -126,9 +127,6 @@ public class FilesForWork {
             stringsWordsCount.put(fileWork, stringsAndCount);
             System.out.println(stringsWordsCount);
 
-            write.write(stringsWordsCount.toString());
-            write.flush();
-
             String content = Files.readString(Path.of(path + "/" + fileWork));
             FilesForWork filesForWork = new FilesForWork(content);
             System.out.println("Вот, что мы нашли: " + filesForWork.search(content, searchedString));
@@ -136,6 +134,9 @@ public class FilesForWork {
             String wordForWork = scanner.nextLine();
 
             if (Objects.equals(wordForWork, stop)) {
+                //записываем мапу в файл
+                write.write(stringsWordsCount.toString() + "\n");
+                write.flush();
                 stringsAndCount.clear();
                 stringsWordsCount.clear();
                 txtFilesList(path);
