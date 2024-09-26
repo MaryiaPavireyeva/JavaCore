@@ -112,7 +112,7 @@ public class FilesForWork {
             System.out.println("Введите слово или строку для поиска:  ");
             String searchedString = scanner.nextLine();
             int quantity = 0;
-            // считаем сколько раз искали слово и кладем ключ(слово) - значение(раз) в мапу
+            // считаем сколько раз искали слово и кладем ключ(слово) - значение(раз) в мапу. Возможно Я неправильно поняла "количество", но пусть будет так
             if (stringsAndCount.isEmpty()) {
                 quantity++;
                 stringsAndCount.put(searchedString, quantity);
