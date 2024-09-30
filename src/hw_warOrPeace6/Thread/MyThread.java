@@ -20,6 +20,5 @@ public class MyThread implements Runnable {
         while (matcher.find()) {
             result = text.substring(matcher.start(), matcher.end());
         }
-
     }
 }

@@ -63,7 +63,7 @@ public class Main1 {
             line = fr.readLine();
         }
         fr.close();
-        System.out.println(top);
+        System.out.println("Top words: " + top);
 
         System.out.println("-------------");
 
