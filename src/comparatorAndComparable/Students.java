@@ -1,4 +1,4 @@
-package ComparatorAndComparable;
+package comparatorAndComparable;
 
 public class Students implements Comparable<Students>{
 

@@ -1,8 +1,9 @@
-package ComparatorAndComparable;
+package comparatorAndComparable;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class StudentComparableMain {
     public static void main(String[] args) {
@@ -18,6 +19,12 @@ public class StudentComparableMain {
         //выведет отсортированный список по именам из класса Students
 
         Collections.sort(students, new StudentsNameComparator());
+        students.forEach(new Consumer<Students>() {
+            @Override
+            public void accept(Students students) {
+                System.out.println(students);
+            }
+        });
         System.out.println(students);
         //печатаем список, отсортированный по именам студентов
 
