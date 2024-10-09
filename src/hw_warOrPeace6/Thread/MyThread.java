@@ -14,6 +14,8 @@ public class MyThread implements Runnable {
 
     @Override
     public void run() {
+        String info = Thread.currentThread().getName();
+        System.out.println("Thread name: " + info);
         String result = "Мы ничего не нашли";
         Pattern p = Pattern.compile(word);
         Matcher matcher = p.matcher(text);

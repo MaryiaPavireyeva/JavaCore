@@ -16,6 +16,8 @@ public class Main3 {
         } else if (file.isDirectory()) {
             files = file.listFiles();
             System.out.println(Arrays.toString(files));
+
+
         }
     }
 }
